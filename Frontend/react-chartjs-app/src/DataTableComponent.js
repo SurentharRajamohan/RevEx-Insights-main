@@ -4,7 +4,8 @@ import { Column } from 'primereact/column';
 
 function DataTableComponent() {
     const [products, setProducts] = useState([]);
-
+    const [globalFilter] = useState(null);
+    
     useEffect(() => {
         // Mock data for example purposes
         const fetchData = async () => {

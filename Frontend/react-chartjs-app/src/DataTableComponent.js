@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
 
 function DataTableComponent() {
     const [products, setProducts] = useState([]);
-    const [globalFilter, setGlobalFilter] = useState(null);
 
     useEffect(() => {
         // Mock data for example purposes

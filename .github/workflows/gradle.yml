@@ -40,6 +40,9 @@ jobs:
       with:
         build-root-directory: backend  # Specify the backend directory as the build root
 
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+      
     - name: Build with Gradle Wrapper
       run: ./gradlew build
       working-directory: backend  # Run the build command from the correct backend directory

@@ -42,6 +42,7 @@ jobs:
 
     - name: Make gradlew executable
       run: chmod +x ./gradlew
+      working-directory: backend  # Ensure this is run in the correct directory
       
     - name: Build with Gradle Wrapper
       run: ./gradlew build

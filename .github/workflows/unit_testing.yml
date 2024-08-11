@@ -4,11 +4,11 @@ on:
   push:
     branches: [ "main" ]
     tags:
-      - 'v*'
+      - 'V*'
   pull_request:
     branches: [ "main" ]
     tags:
-      - 'v*'
+      - 'V*'
 
 jobs:
   gradle-build:

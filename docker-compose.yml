@@ -21,7 +21,7 @@ services:
     container_name: dockerized_frontend
     restart: always
     build:
-      context: ./frontend
+      context: ./Frontend/react-chartjs-app
       dockerfile: Dockerfile
     ports:
       - "80:80"

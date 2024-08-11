@@ -162,6 +162,7 @@ jobs:
           uses: docker/build-push-action@v6
           
           with:
-            context: /Frontend/react-chartjs-app/
+            context: .
+            file: ./Frontend/react-chartjs-app/Dockerfile
             push: true
             tags: mathavan2711/githubaction:latest

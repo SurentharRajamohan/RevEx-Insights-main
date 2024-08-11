@@ -38,7 +38,7 @@ jobs:
           done
 
       - name: Test Backend Connectivity (for debugging)
-        run: docker exec dockerized_backend curl -s http://localhost:8080/actuator/health
+        run: docker exec dockerized_backend netstat -an | grep 'LISTEN' | grep ':8080'
       
       - name: Run Health Checks
         run: |

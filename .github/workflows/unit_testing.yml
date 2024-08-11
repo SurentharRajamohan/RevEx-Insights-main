@@ -162,7 +162,6 @@ jobs:
           uses: docker/build-push-action@v6
           
           with:
-            # context: ./Frontend
-            cache-dependency-path: 'Frontend/react-chartjs-app'
+            context: "{{defaultContext}}:Frontend/react-chartjs-app"
             push: true
             tags: mathavan2711/githubaction:latest

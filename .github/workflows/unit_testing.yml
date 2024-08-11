@@ -143,7 +143,7 @@ jobs:
         docker-compose down
         docker-compose -f docker-compose.previous.yml up -d  # Replace with your rollback command
 
-  docker-frontend:
+  docker:
       runs-on: ubuntu-latest
       steps:
         - name: Set up QEMU
@@ -158,10 +158,19 @@ jobs:
             username: ${{ secrets.DOCKER_USER }}
             password: ${{ secrets.DOCKER_PASSWORD }}
             
-        - name: Build and push
+        - name: Build and push Frontend
           uses: docker/build-push-action@v6
           
           with:
             context: "{{defaultContext}}:Frontend/react-chartjs-app"
             push: true
-            tags: mathavan2711/githubaction:latest
+            tags: mathavan2711/frontend:latest
+
+        - name: Build and push Backend
+          uses: docker/build-push-action@v6
+          
+          with:
+            context: "{{defaultContext}}:backend"
+            push: true
+            tags: mathavan2711/backend:latest
+

@@ -163,6 +163,6 @@ jobs:
           
           with:
             context: .
-            file: ./Frontend/react-chartjs-app/Dockerfile
+            file: Frontend/react-chartjs-app/Dockerfile
             push: true
             tags: mathavan2711/githubaction:latest

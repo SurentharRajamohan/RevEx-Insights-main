@@ -145,6 +145,10 @@ jobs:
 
   docker:
       runs-on: ubuntu-latest
+
+      env:
+        CURRENT_VERSION: ${{ secrets.DOCKER_VERSIONING }}  # Use Git
+      
       steps:
         - name: Set up QEMU
           uses: docker/setup-qemu-action@v3
@@ -157,6 +161,15 @@ jobs:
           with:
             username: ${{ secrets.DOCKER_USER }}
             password: ${{ secrets.DOCKER_PASSWORD }}
+
+        - name: Increment version
+          id: increment_version
+          run: |
+            IFS='.' read -r major minor <<< "${DOCKER_VERSIONING}"
+            minor=$((minor + 1))
+            NEW_VERSION="${major}.${minor}"
+            echo "New version will be $NEW_VERSION"
+            echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
             
         - name: Build and push Frontend
           uses: docker/build-push-action@v6
@@ -164,7 +177,7 @@ jobs:
           with:
             context: "{{defaultContext}}:Frontend/react-chartjs-app"
             push: true
-            tags: mathavan2711/frontend:latest
+            tags: mathavan2711/frontend:${{ env.VERSION }}
 
         - name: Build and push Backend
           uses: docker/build-push-action@v6
@@ -172,5 +185,13 @@ jobs:
           with:
             context: "{{defaultContext}}:backend"
             push: true
-            tags: mathavan2711/backend:latest
+            tags: mathavan2711/backend:${{ env.VERSION }}
+
+        - name: Update version in repository
+          if: ${{ github.repository_owner == 'SurentharRajamohan' }}
+          run: |
+            echo "Updating version in GitHub repository"
+            # Use GitHub CLI or API to update the secret here
+            # Example with GitHub CLI
+            gh secret set DOCKER_VERSIONING -b"${{ env.VERSION }}"
 

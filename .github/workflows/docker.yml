@@ -22,14 +22,12 @@ jobs:
       - name: Build and Spin up Docker Compose
         run: docker-compose up -d --build
 
-      - name: Print Backend Logs (for debugging)
-        run: docker logs dockerized_backend
-
       - name: Wait for services to be ready
         run: |
           # Wait for MySQL to be ready
           until docker exec dockerized_mysql mysqladmin ping --silent; do
             echo "Waiting for MySQL...";
+            docker logs dockerized_backend  # Print logs to see what's happening
             sleep 3;
           done
 

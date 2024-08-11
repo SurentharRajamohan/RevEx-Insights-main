@@ -163,6 +163,6 @@ jobs:
           
           with:
             # context: ./Frontend
-            cache-dependency-path: 'Frontend/react-chartjs-app/Dockerfile'
+            cache-dependency-path: 'Frontend/react-chartjs-app'
             push: true
             tags: mathavan2711/githubaction:latest
